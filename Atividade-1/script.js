@@ -58,3 +58,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adicione aqui outros scripts, como validação de formulário customizada, etc.
 
 });
+function applyInputMasks() {
+    
+    const inputCPF = document.getElementById('cpf');
+    const inputTelefone = document.getElementById('telefone');
+    const inputCEP = document.getElementById('cep');
+
+    // Máscara de CPF: 000.000.000-00
+    if (inputCPF) {
+        inputCPF.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é dígito
+            if (value.length > 11) value = value.substring(0, 11);
+
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+
+            e.target.value = value;
+        });
+    }
+
+    // Máscara de Telefone: (00) 90000-0000 ou (00) 0000-0000
+    if (inputTelefone) {
+        inputTelefone.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.substring(0, 11);
+            
+            value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+            value = value.replace(/(\d{4,5})(\d{4})$/, '$1-$2');
+            
+            e.target.value = value;
+        });
+    }
+
+    // Máscara de CEP: 00000-000
+    if (inputCEP) {
+        inputCEP.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 8) value = value.substring(0, 8);
+            
+            value = value.replace(/^(\d{5})(\d)/, '$1-$2');
+
+            e.target.value = value;
+        });
+    }
+}
+
+// Chame as funções dentro do DOMContentLoaded para garantir que os elementos existam
+document.addEventListener('DOMContentLoaded', () => {
+    applyInputMasks(); 
+});

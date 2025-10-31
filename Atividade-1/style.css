@@ -1,18 +1,12 @@
-/*
- * style.css
- * Base para o Design Mobile-First da ONG Abrace a Causa
- * Foco em Empatia, Carinho, Acessibilidade (WCAG AA) e Coerência Visual
- */
 
-/* 1. VARIÁVEIS E RESET BÁSICO */
 :root {
-    /* Paleta de Cores Suaves e Inspiradoras */
-    --color-primary: #3498db; /* Azul da Confiança */
-    --color-secondary: #2ecc71; /* Verde da Esperança e Sustentabilidade */
-    --color-tertiary: #f39c12; /* Laranja da Energia/Ação */
-    --color-danger: #e74c3c; /* Vermelho para destaque negativo (erros de formulário) */
-    --color-background-light: #f4f7f6; /* Fundo muito claro e suave */
-    --color-text-dark: #2c3e50; /* Azul escuro para leitura */
+
+    --color-primary: #3498db; 
+    --color-secondary: #2ecc71;
+    --color-tertiary: #f39c12; 
+    --color-danger: #e74c3c; 
+    --color-background-light: #f4f7f6; 
+    --color-text-dark: #2c3e50; 
     --color-text-light: #ffffff;
     --color-border: #bdc3c7;
 
@@ -92,14 +86,12 @@ h3 { font-size: 1.5rem; }
 }
 
 a, a:visited {
-    color: var(--color-primary);
     text-decoration: none;
     transition: color 0.3s;
 }
 
 a:hover, a:focus {
-    color: var(--color-secondary);
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* 4. CABEÇALHO (HEADER) */
