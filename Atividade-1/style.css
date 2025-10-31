@@ -1,19 +1,24 @@
 /*
  * style.css
  * Base para o Design Mobile-First da ONG Abrace a Causa
- * Foco em Empatia, Carinho e Acessibilidade (WCAG AA)
+ * Foco em Empatia, Carinho, Acessibilidade (WCAG AA) e Coerência Visual
  */
 
 /* 1. VARIÁVEIS E RESET BÁSICO */
 :root {
-    --color-primary: #007bff; /* Azul da esperança */
-    --color-secondary: #28a745; /* Verde da sustentabilidade */
-    --color-tertiary: #fd7e14; /* Laranja da energia/ação */
-    --color-background-light: #f8f9fa; /* Fundo muito claro */
-    --color-text-dark: #343a40;
+    /* Paleta de Cores Suaves e Inspiradoras */
+    --color-primary: #3498db; /* Azul da Confiança */
+    --color-secondary: #2ecc71; /* Verde da Esperança e Sustentabilidade */
+    --color-tertiary: #f39c12; /* Laranja da Energia/Ação */
+    --color-danger: #e74c3c; /* Vermelho para destaque negativo (erros de formulário) */
+    --color-background-light: #f4f7f6; /* Fundo muito claro e suave */
+    --color-text-dark: #2c3e50; /* Azul escuro para leitura */
     --color-text-light: #ffffff;
+    --color-border: #bdc3c7;
+
+    /* Tipografia */
     --font-primary: 'Arial', sans-serif;
-    --font-heading: 'Georgia', serif; /* Fonte com mais personalidade para títulos */
+    --font-heading: 'Georgia', serif; 
     --spacing-default: 1rem;
 }
 
@@ -35,6 +40,18 @@ body {
     background-color: var(--color-text-light);
 }
 
+/* Esconde visualmente mas mantém para leitores de tela */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
 /* 2. CONTAINER E LAYOUT GERAL */
 .container {
     width: 90%;
@@ -43,10 +60,20 @@ body {
     padding: var(--spacing-default) 0;
 }
 
+section {
+    padding: calc(var(--spacing-default) * 3) 0; /* Mais padding para seções */
+}
+
 .background-color-light {
     background-color: var(--color-background-light);
-    padding: calc(var(--spacing-default) * 2) 0; /* Mais padding para seções */
 }
+
+.text-center {
+    text-align: center;
+}
+
+.margin-top-1 { margin-top: 1rem; }
+.margin-top-2 { margin-top: 2rem; }
 
 /* 3. TIPOGRAFIA E ACESSIBILIDADE */
 h1, h2, h3, h4 {
@@ -55,12 +82,15 @@ h1, h2, h3, h4 {
     line-height: 1.2;
 }
 
-/* Hierarquia de Títulos */
 h1 { font-size: 2rem; }
 h2 { font-size: 1.75rem; color: var(--color-primary); }
 h3 { font-size: 1.5rem; }
 
-/* Garante contraste adequado (WCAG AA) */
+.lead-text {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+}
+
 a, a:visited {
     color: var(--color-primary);
     text-decoration: none;
@@ -75,22 +105,22 @@ a:hover, a:focus {
 /* 4. CABEÇALHO (HEADER) */
 header {
     background-color: var(--color-text-light);
-    padding: var(--spacing-default) 0;
-    border-bottom: 1px solid var(--color-background-light);
-    position: sticky; /* Sticky para melhor navegação */
+    border-bottom: 1px solid var(--color-border);
+    position: sticky; 
     top: 0;
     z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0; /* Remove padding vertical interno no container do header */
+    padding: 0.75rem 5%; /* Padding nos lados para mobile */
 }
 
 .logo {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 1.5rem;
     color: var(--color-primary);
 }
@@ -98,42 +128,49 @@ header .container {
 /* Navegação Mobile-First */
 nav ul {
     list-style: none;
-    display: none; /* Esconde o menu por padrão no mobile */
+    display: none; 
     flex-direction: column;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
     background-color: var(--color-text-light);
-    border-top: 1px solid var(--color-background-light);
+    border-top: 1px solid var(--color-border);
     padding: var(--spacing-default);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+nav ul[aria-expanded="true"] {
+    display: flex;
 }
 
 .menu-toggle {
-    display: block; /* Mostra o botão de toggle no mobile */
+    display: block; 
     background: var(--color-primary);
     color: var(--color-text-light);
     border: none;
     padding: 0.5rem 1rem;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 nav ul a {
     display: block;
-    padding: 0.5rem 0;
+    padding: 0.75rem 0;
     font-weight: 500;
 }
 
 /* 5. BOTÕES (CTA - Call To Action) */
 .button, .cta-button {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 5px;
+    padding: 0.9rem 2rem;
+    border-radius: 30px; /* Borda arredondada para sensação de carinho */
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    transition: background-color 0.3s, opacity 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
     margin: 0.5rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .primary-cta {
@@ -143,8 +180,9 @@ nav ul a {
 }
 
 .primary-cta:hover, .primary-cta:focus {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background-color: #2980b9;
+    border-color: #2980b9;
+    transform: translateY(-2px);
 }
 
 .secondary-cta {
@@ -154,32 +192,46 @@ nav ul a {
 }
 
 .secondary-cta:hover, .secondary-cta:focus {
-    background-color: #1e7e34;
-    border-color: #1e7e34;
+    background-color: #27ae60;
+    border-color: #27ae60;
+    transform: translateY(-2px);
 }
 
 .tertiary-cta {
-    background-color: transparent;
+    background-color: var(--color-text-light);
     color: var(--color-primary);
     border: 2px solid var(--color-primary);
+    box-shadow: none;
 }
 
 .tertiary-cta:hover, .tertiary-cta:focus {
     background-color: var(--color-primary);
     color: var(--color-text-light);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.full-width {
+    width: 100%;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
 
 /* 6. SEÇÃO HERO */
 .hero {
     position: relative;
     color: var(--color-text-light);
-    min-height: 70vh;
+    min-height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 4rem 0;
+    overflow: hidden;
 }
 
 .hero-image img {
@@ -189,66 +241,211 @@ nav ul a {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1; /* Manda a imagem para trás */
-    opacity: 0.7; /* Suaviza a imagem para o texto ser legível */
+    z-index: -1; 
+    opacity: 0.8; 
 }
 
 .hero .container {
-    /* Garante que o texto fique acima da imagem */
     position: relative;
     z-index: 2; 
-    max-width: 800px;
-    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente para melhor leitura */
-    padding: var(--spacing-default);
-    border-radius: 10px;
+    max-width: 90%;
+    /* Fundo levemente colorido para leitura */
+    background-color: rgba(44, 62, 80, 0.6); 
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(2px);
 }
 
 .hero h2 {
     font-size: 2.5rem;
     color: var(--color-text-light);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
-/* 7. SEÇÃO DE CONTEÚDO (MISSÃO, CONTATO, ETC) */
-section {
-    padding: calc(var(--spacing-default) * 2) 0;
-}
-
+/* 7. CARTÕES DE MISSÃO */
 .card {
-    border: 1px solid #ddd;
-    padding: var(--spacing-default);
-    border-radius: 8px;
+    background-color: var(--color-text-light);
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-default) * 1.5;
+    border-radius: 10px;
     margin-top: var(--spacing-default);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    text-align: center;
 }
 
 .card h3 {
     color: var(--color-secondary);
+    margin-bottom: 0.5rem;
 }
 
-/* 8. CONTATO E MULTIMÍDIA */
-.contact-info p {
+/* 8. SEÇÃO DE PROJETOS E ARTIGOS (projetos.html) */
+.projeto-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.projeto-card figure {
+    width: 100%;
+    height: 250px; /* Altura fixa para mobile */
+    overflow: hidden;
+}
+
+.projeto-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.projeto-card:hover img {
+    transform: scale(1.05);
+}
+
+.projeto-card .content {
+    padding: 1.5rem;
+}
+
+.projeto-card h3 {
+    color: var(--color-primary);
+}
+
+.categoria {
+    font-style: italic;
+    color: #6c757d;
+    margin-top: 0.5rem;
+}
+
+/* 9. GALERIA DE MULTIMÍDIA */
+.galeria {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.gallery-item {
+    background-color: var(--color-text-light);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.gallery-item figcaption {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    background-color: var(--color-background-light);
+    color: #6c757d;
+}
+
+/* 10. ESTILOS DE FORMULÁRIO (cadastro.html e doação) */
+.form-container {
+    max-width: 700px;
+    padding: 2rem;
+    background-color: var(--color-text-light);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+form fieldset {
+    border: 1px solid var(--color-border);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+}
+
+form legend {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    padding: 0 0.5rem;
+}
+
+form label {
+    display: block;
+    margin-top: 1rem;
     margin-bottom: 0.5rem;
     font-weight: 500;
 }
 
-.map-embed {
-    margin-top: 2rem;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+form input:not([type="radio"]):not([type="checkbox"]),
+form select,
+form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.map-embed iframe {
-    display: block; /* Remove o espaço extra abaixo do iframe */
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+    outline: none;
 }
 
-/* 9. RODAPÉ (FOOTER) */
+/* Validação nativa com feedback visual */
+form input:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+}
+
+/* Grupos de Rádio/Checkbox */
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.radio-group input[type="radio"] + label,
+.checkbox-group input[type="checkbox"] + label {
+    display: inline-block;
+    background: var(--color-background-light);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    transition: background 0.2s;
+}
+
+.radio-group input[type="radio"]:checked + label,
+.checkbox-group input[type="checkbox"]:checked + label {
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    border-color: var(--color-primary);
+}
+
+.politica {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+
+/* 11. RODAPÉ (FOOTER) */
 footer {
     background-color: var(--color-text-dark);
     color: var(--color-background-light);
-    padding: var(--spacing-default);
+    padding: 1.5rem 0;
     text-align: center;
     font-size: 0.9rem;
+}
+
+footer .container {
+    padding: 0 5%;
 }
 
 footer a {
@@ -260,26 +457,36 @@ footer a {
 }
 
 .social-links a {
-    font-size: 1.5rem;
-    margin: 0 0.5rem;
+    font-size: 1.8rem;
+    margin: 0 0.75rem;
     color: var(--color-background-light);
+    transition: color 0.3s;
 }
 
-/* 10. MEDIA QUERIES (BREAKPOINT para Tablets e Desktops) */
+.social-links a:hover {
+    color: var(--color-secondary);
+}
+
+/* 12. MEDIA QUERIES (BREAKPOINT para Tablets e Desktops) */
 @media (min-width: 768px) {
     
     /* Layout do Header */
+    header .container {
+        padding: 0.75rem 0;
+    }
+
     .menu-toggle {
-        display: none; /* Esconde o botão de toggle no desktop */
+        display: none; 
     }
 
     nav ul {
-        display: flex; /* Mostra a lista horizontalmente no desktop */
+        display: flex !important; /* Força a visualização no desktop */
         flex-direction: row;
         position: static;
         width: auto;
         border-top: none;
         padding: 0;
+        box-shadow: none;
         align-items: center;
     }
 
@@ -297,13 +504,33 @@ footer a {
         grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
     }
-
+    
     /* Botões */
-    .button-group .button {
-        margin: 0 0.75rem;
+    .button-group {
+        flex-direction: row;
+        justify-content: center;
     }
 
-    .hero h2 {
-        font-size: 3.5rem;
+    /* Projetos */
+    .projeto-card {
+        flex-direction: row; /* Layout horizontal */
+    }
+
+    .projeto-card.reverse-layout {
+        flex-direction: row-reverse; /* Layout reverso */
+    }
+
+    .projeto-card figure, .projeto-card .content {
+        width: 50%;
+        height: auto;
+    }
+
+    .projeto-card figure {
+        height: 350px; /* Maior altura no desktop */
+    }
+    
+    /* Galeria */
+    .galeria {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

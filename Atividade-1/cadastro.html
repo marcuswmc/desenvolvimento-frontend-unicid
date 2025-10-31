@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Junte-se à Abrace a Causa</title>
+    <meta name="description" content="Preencha o formulário para se cadastrar como voluntário ou apoiador da ONG Abrace a Causa e comece a fazer a diferença.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/favicon/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1 class="logo">Abrace a Causa</h1>
+            <nav aria-label="Navegação Principal">
+                <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false">
+                    Menu
+                </button>
+                <ul id="main-menu">
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="projetos.html">Projetos & Voluntariado</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><a href="cadastro.html" aria-current="page" class="cta-button">Cadastre-se</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="background-color-light">
+        <section id="cadastro-form" aria-labelledby="cadastro-heading">
+            <div class="container form-container">
+                <h2 id="cadastro-heading">Seu Cadastro é o Primeiro Passo para Mudar o Mundo!</h2>
+                <p class="lead-text">
+                    Preencha o formulário abaixo. Seus dados são confidenciais e importantes para encontrarmos a melhor forma de você nos ajudar.
+                </p>
+
+                <form action="#" method="POST" id="form-voluntario">
+
+                    <fieldset>
+                        <legend><span aria-hidden="true">👤</span> Informações Pessoais</legend>
+
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required 
+                               pattern="[A-Za-zÀ-ú\s]{5,}" title="O nome deve conter pelo menos 5 letras e apenas letras e espaços.">
+
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" placeholder="seu.email@exemplo.com" required>
+
+                        <label for="cpf">CPF:</label>
+                        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required 
+                               pattern="^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}$" title="Formato: 000.000.000-00">
+
+                        <label for="telefone">Telefone:</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(00) 90000-0000" required
+                               pattern="^\(?\d{2}\)?\s?\d{4,5}\-?\d{4}$" title="Formato: (00) 90000-0000 ou (00) 0000-0000">
+
+                        <label for="dataNascimento">Data de Nascimento:</label>
+                        <input type="date" id="dataNascimento" name="dataNascimento" required 
+                               min="1900-01-01" max="2007-01-01">
+                    </fieldset>
+
+                    <fieldset>
+                        <legend><span aria-hidden="true">🏠</span> Localização</legend>
+
+                        <label for="cep">CEP:</label>
+                        <input type="text" id="cep" name="cep" placeholder="00000-000" required 
+                               pattern="^\d{5}\-?\d{3}$" title="Formato: 00000-000">
+
+                        <label for="endereco">Endereço (Rua/Avenida, Número):</label>
+                        <input type="text" id="endereco" name="endereco" placeholder="Rua Exemplo, 123" required>
+
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" id="cidade" name="cidade" placeholder="Sua Cidade" required>
+
+                        <label for="estado">Estado:</label>
+                        <select id="estado" name="estado" required>
+                            <option value="" disabled selected>Selecione seu Estado</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PR">Paraná</option>
+                            <option value="OUTRO">Outro / Não listado</option>
+                        </select>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend><span aria-hidden="true">💡</span> Interesse</legend>
+                        <p>Qual área de voluntariado mais lhe interessa?</p>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="area1" name="area_interesse" value="educacao">
+                            <label for="area1">Educação e Aulas</label>
+                            
+                            <input type="checkbox" id="area2" name="area_interesse" value="saude">
+                            <label for="area2">Saúde e Bem-Estar</label>
+                            
+                            <input type="checkbox" id="area3" name="area_interesse" value="administracao">
+                            <label for="area3">Administrativo e Digital</label>
+                            
+                            <input type="checkbox" id="area4" name="area_interesse" value="eventos">
+                            <label for="area4">Organização de Eventos</label>
+                        </div>
+                        
+                        <label for="mensagem">Fale um pouco sobre sua motivação e disponibilidade (Opcional):</label>
+                        <textarea id="mensagem" name="mensagem" rows="4"></textarea>
+
+                        <p class="politica">
+                            <input type="checkbox" id="termos" name="termos" required>
+                            <label for="termos">Concordo com os <a href="#">Termos de Uso</a> e a Política de Privacidade. **(Obrigatório)**</label>
+                        </p>
+                    </fieldset>
+
+                    <button type="submit" class="button primary-cta full-width margin-top-2">Enviar Cadastro de Voluntário</button>
+
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Abrace a Causa. Todos os direitos reservados. | <a href="#transparencia">Relatórios de Transparência</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script>
+        // Adicionar uma chamada para a função de máscaras no DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Se você criar uma função chamada applyInputMasks no script.js, chame-a aqui.
+            // Exemplo de como você faria (a função em si estaria no script.js):
+            if (typeof applyInputMasks === 'function') {
+                applyInputMasks(); 
+            } else {
+                console.warn("Função 'applyInputMasks' não encontrada. Máscaras de input não aplicadas.");
+            }
+        });
+    </script>
+</body>
+</html>
