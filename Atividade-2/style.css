@@ -1,0 +1,607 @@
+/*
+ * style.css - Corrigido e Atualizado para Entrega II: Design System
+ * Foco na correção de erros e implementação dos requisitos de CSS3.
+ */
+
+/* ============================================== */
+/* 0. DESIGN SYSTEM: VARIÁVEIS CSS CUSTOMIZADAS   */
+/* ============================================== */
+:root {
+    /* --- CORES (Paleta de 8+ cores) --- */
+    --color-primary: #3498db;        /* Azul Confiança/ONG */
+    --color-primary-dark: #2980b9;   /* Hover/Active */
+    --color-secondary: #2ecc71;      /* Verde Esperança/Ação */
+    --color-secondary-dark: #27ae60;
+    --color-tertiary: #f39c12;       /* Laranja Destaque/CTA Secundário */
+    --color-tertiary-dark: #e67e22;
+    
+    --color-neutral-dark: #2c3e50;   /* Texto e Fundo Rodapé */
+    --color-neutral-light: #f4f7f6;  /* Fundo Suave */
+    --color-neutral-white: #ffffff;  /* Fundo Principal */
+    --color-neutral-border: #bdc3c7; /* Borda/Divisor */
+    --color-danger: #e74c3c;         /* Erro/Alerta */
+
+    /* --- ESPAÇAMENTO MODULAR (Base 8px, 1rem = 16px) --- */
+    --spacing-xs: 4px;   /* Metade */
+    --spacing-sm: 8px;   /* 1x */
+    --spacing-md: 16px;  /* 2x */
+    --spacing-lg: 24px;  /* 3x */
+    --spacing-xl: 32px;  /* 4x */
+    --spacing-xxl: 48px; /* 6x */
+    --spacing-xxxl: 64px;/* 8x */
+
+    /* --- TIPOGRAFIA HIERÁRQUICA (5+ tamanhos) --- */
+    --font-size-base: 1rem;      /* 16px */
+    --font-size-sm: 0.875rem;    /* 14px */
+    --font-size-h1: 2.5rem;      /* 40px */
+    --font-size-h2: 2rem;        /* 32px */
+    --font-size-h3: 1.5rem;      /* 24px */
+    --font-size-h4: 1.25rem;     /* 20px */
+    --font-size-lead: 1.15rem;   /* Destaque */
+
+    --font-primary: 'Arial', sans-serif;
+    --font-heading: 'Georgia', serif; 
+    
+    --border-radius-base: 8px;
+    --transition-speed: 0.3s;
+}
+
+
+/* ============================================== */
+/* 1. BASE E RESET - Ajustes de Variáveis         */
+/* ============================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: var(--font-size-base); /* Usando variável */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--color-neutral-dark); /* Usando variável */
+    background-color: var(--color-neutral-white); /* Usando variável */
+}
+
+/* Esconde visualmente mas mantém para leitores de tela */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* 2. CONTAINER E LAYOUT GERAL */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-md) 0; /* Aplicando espaçamento modular */
+}
+
+section {
+    /* CORREÇÃO AQUI: Usando a variável de espaçamento modular */
+    padding: var(--spacing-xxl) 0; 
+}
+
+.background-color-light {
+    background-color: var(--color-neutral-light); /* Usando variável */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.margin-top-1 { margin-top: var(--spacing-md); } /* 16px */
+.margin-top-2 { margin-top: var(--spacing-xl); } /* 32px */
+
+/* 3. TIPOGRAFIA E ACESSIBILIDADE */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    margin-bottom: var(--spacing-lg); /* 24px */
+    line-height: 1.2;
+    color: var(--color-neutral-dark);
+}
+
+h1 { font-size: var(--font-size-h1); } /* 40px */
+h2 { font-size: var(--font-size-h2); color: var(--color-primary); } /* 32px */
+h3 { font-size: var(--font-size-h3); } /* 24px */
+
+.lead-text {
+    font-size: var(--font-size-lead); /* 1.15rem */
+    margin-bottom: var(--spacing-xl); /* 32px */
+}
+
+a, a:visited {
+    text-decoration: none;
+    transition: color var(--transition-speed);
+}
+
+a:hover, a:focus {
+    text-decoration: none; 
+}
+
+/* 4. CABEÇALHO (HEADER) */
+header {
+    background-color: var(--color-neutral-white);
+    border-bottom: 1px solid var(--color-neutral-border);
+    position: sticky; 
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 5%; 
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+
+/* Navegação Mobile-First */
+nav ul {
+    list-style: none;
+    display: none; 
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-neutral-white);
+    border-top: 1px solid var(--color-neutral-border);
+    padding: var(--spacing-md);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+nav ul[aria-expanded="true"] {
+    display: flex;
+}
+
+.menu-toggle {
+    display: block; 
+    background: var(--color-primary);
+    color: var(--color-neutral-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+nav ul a {
+    display: block;
+    padding: 0.75rem 0;
+    font-weight: 500;
+}
+
+/* 5. BOTÕES (CTA - Call To Action) */
+.button, .cta-button {
+    display: inline-block;
+    padding: var(--spacing-md) var(--spacing-xl); /* Usando variáveis */
+    border-radius: 30px; 
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: all var(--transition-speed); /* Usando variável de transição */
+    margin: var(--spacing-sm) 0; /* Usando variável */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.primary-cta {
+    background-color: var(--color-primary);
+    color: var(--color-neutral-white);
+    border: 2px solid var(--color-primary);
+}
+
+.primary-cta:hover, .primary-cta:focus {
+    background-color: var(--color-primary-dark); /* Usando variável Dark */
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+}
+
+.secondary-cta {
+    background-color: var(--color-secondary);
+    color: var(--color-neutral-white);
+    border: 2px solid var(--color-secondary);
+}
+
+.secondary-cta:hover, .secondary-cta:focus {
+    background-color: var(--color-secondary-dark); /* Usando variável Dark */
+    border-color: var(--color-secondary-dark);
+    transform: translateY(-2px);
+}
+
+.tertiary-cta {
+    background-color: var(--color-neutral-white);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    box-shadow: none;
+}
+
+.tertiary-cta:hover, .tertiary-cta:focus {
+    background-color: var(--color-primary);
+    color: var(--color-neutral-white);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.full-width {
+    width: 100%;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md); /* Usando variável */
+    margin-top: var(--spacing-lg); /* Usando variável */
+}
+
+/* 6. SEÇÃO HERO */
+.hero {
+    position: relative;
+    color: var(--color-text-light);
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 0;
+    overflow: hidden;
+}
+
+.hero-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; 
+    opacity: 0.8; 
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2; 
+    max-width: 90%;
+    background-color: rgba(44, 62, 80, 0.6); 
+    padding: var(--spacing-xl); /* Usando variável */
+    border-radius: 15px;
+    backdrop-filter: blur(2px);
+}
+
+.hero h2 {
+    font-size: var(--font-size-h1); /* Usando variável */
+    color: var(--color-neutral-white);
+    margin-bottom: var(--spacing-md); /* Usando variável */
+}
+
+/* 7. CARTÕES DE MISSÃO */
+.card {
+    background-color: var(--color-neutral-white);
+    border: 1px solid var(--color-neutral-border);
+    padding: var(--spacing-lg); /* Usando variável */
+    border-radius: var(--border-radius-base); /* Usando variável */
+    margin-top: var(--spacing-md); /* Usando variável */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.card h3 {
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-sm); /* Usando variável */
+}
+
+/* 8. SEÇÃO DE PROJETOS E ARTIGOS (projetos.html) */
+.projeto-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-xxl); /* Usando variável */
+    border: 1px solid var(--color-neutral-border);
+    border-radius: var(--border-radius-base); /* Usando variável */
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.projeto-card figure {
+    width: 100%;
+    height: 250px; 
+    overflow: hidden;
+}
+
+.projeto-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-speed);
+}
+
+.projeto-card:hover img {
+    transform: scale(1.05);
+}
+
+.projeto-card .content {
+    padding: var(--spacing-lg); /* Usando variável */
+}
+
+.projeto-card h3 {
+    color: var(--color-primary);
+}
+
+.categoria {
+    font-style: italic;
+    color: #6c757d;
+    margin-top: var(--spacing-sm); /* Usando variável */
+}
+
+/* 9. GALERIA DE MULTIMÍDIA */
+.galeria {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md); /* Usando variável */
+    margin-bottom: var(--spacing-xl); /* Usando variável */
+}
+
+.gallery-item {
+    background-color: var(--color-neutral-white);
+    border-radius: var(--border-radius-base); /* Usando variável */
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.gallery-item figcaption {
+    padding: 0.75rem;
+    font-size: var(--font-size-sm); /* Usando variável */
+    background-color: var(--color-neutral-light);
+    color: #6c757d;
+}
+
+/* 10. ESTILOS DE FORMULÁRIO (cadastro.html e doação) */
+.form-container {
+    max-width: 700px;
+    padding: var(--spacing-xl); /* Usando variável */
+    background-color: var(--color-neutral-white);
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+form fieldset {
+    border: 1px solid var(--color-neutral-border);
+    padding: var(--spacing-lg); /* Usando variável */
+    margin-bottom: var(--spacing-xl); /* Usando variável */
+    border-radius: var(--border-radius-base); /* Usando variável */
+}
+
+form legend {
+    font-size: var(--font-size-h4); /* Usando variável */
+    font-weight: bold;
+    color: var(--color-primary);
+    padding: 0 var(--spacing-sm); /* Usando variável */
+}
+
+form label {
+    display: block;
+    margin-top: var(--spacing-md); /* Usando variável */
+    margin-bottom: var(--spacing-sm); /* Usando variável */
+    font-weight: 500;
+}
+
+form input:not([type="radio"]):not([type="checkbox"]),
+form select,
+form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-neutral-border);
+    border-radius: 5px;
+    font-size: var(--font-size-base);
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    border-color: var(--color-secondary);
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+    outline: none;
+}
+
+/* Validação nativa com feedback visual */
+form input:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+}
+
+/* Grupos de Rádio/Checkbox */
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md); /* Usando variável */
+    margin-top: var(--spacing-md); /* Usando variável */
+}
+
+.radio-group input[type="radio"] + label,
+.checkbox-group input[type="checkbox"] + label {
+    display: inline-block;
+    background: var(--color-neutral-light);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid var(--color-neutral-border);
+    transition: background var(--transition-speed);
+}
+
+.radio-group input[type="radio"]:checked + label,
+.checkbox-group input[type="checkbox"]:checked + label {
+    background: var(--color-primary);
+    color: var(--color-neutral-white);
+    border-color: var(--color-primary);
+}
+
+.politica {
+    margin-top: var(--spacing-lg); /* Usando variável */
+    font-size: var(--font-size-sm); /* Usando variável */
+}
+
+
+/* 11. RODAPÉ (FOOTER) */
+footer {
+    background-color: var(--color-neutral-dark);
+    color: var(--color-neutral-light);
+    padding: var(--spacing-lg) 0; /* Usando variável */
+    text-align: center;
+    font-size: var(--font-size-sm); /* Usando variável */
+}
+
+footer .container {
+    padding: 0 5%;
+}
+
+footer a {
+    color: var(--color-secondary);
+}
+
+.social-links {
+    margin-top: var(--spacing-md); /* Usando variável */
+}
+
+.social-links a {
+    font-size: 1.8rem;
+    margin: 0 0.75rem;
+    color: var(--color-neutral-light);
+    transition: color var(--transition-speed);
+}
+
+.social-links a:hover {
+    color: var(--color-secondary);
+}
+
+/* 12. BREAKPOINTS RESPONSIVOS (5 Breakpoints) */
+
+/* 12.1. BREAKPOINT: Tablet Pequeno (480px) */
+@media (min-width: 480px) {
+    .button {
+        padding: var(--spacing-md) var(--spacing-xxl);
+    }
+}
+
+/* 12.2. BREAKPOINT: Tablet (768px) */
+@media (min-width: 768px) {
+    
+    /* Layout do Header */
+    header .container {
+        padding: 0.75rem 0;
+    }
+
+    .menu-toggle {
+        display: none; 
+    }
+
+    nav ul {
+        display: flex !important;
+        flex-direction: row;
+        position: static;
+        width: auto;
+        border-top: none;
+        padding: 0;
+        box-shadow: none;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin-left: var(--spacing-lg); /* Usando variável */
+    }
+
+    nav ul a {
+        padding: 0;
+    }
+
+    /* Layout de Colunas (Missão) */
+    .grid-3-col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-xl); /* Usando variável */
+    }
+    
+    /* Botões */
+    .button-group {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    /* Projetos */
+    .projeto-card {
+        flex-direction: row; 
+    }
+
+    .projeto-card.reverse-layout {
+        flex-direction: row-reverse; 
+    }
+
+    .projeto-card figure, .projeto-card .content {
+        width: 50%;
+        height: auto;
+    }
+
+    .projeto-card figure {
+        height: 350px; 
+    }
+    
+    /* Galeria */
+    .galeria {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+    }
+}
+
+/* 12.3. BREAKPOINT: Desktop Médio (992px) */
+@media (min-width: 992px) {
+    
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2.25rem; }
+    
+    /* Grid de 12 colunas para layout principal (Exemplo de uso: na index) */
+    .grid-12-col {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: var(--spacing-xl);
+    }
+
+    /* Layout da Galeria mais denso */
+    .galeria {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+
+/* 12.4. BREAKPOINT: Desktop Grande (1200px) */
+@media (min-width: 1200px) {
+    
+    .hero h2 {
+        font-size: 3.5rem;
+    }
+}
+
+/* 12.5. BREAKPOINT: Desktop Ultra (1440px) */
+@media (min-width: 1440px) {
+    :root {
+        /* Aumenta a base para telas grandes */
+        --font-size-base: 1.1rem; 
+    }
+}
