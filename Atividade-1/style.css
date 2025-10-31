@@ -1,0 +1,309 @@
+/*
+ * style.css
+ * Base para o Design Mobile-First da ONG Abrace a Causa
+ * Foco em Empatia, Carinho e Acessibilidade (WCAG AA)
+ */
+
+/* 1. VARIÁVEIS E RESET BÁSICO */
+:root {
+    --color-primary: #007bff; /* Azul da esperança */
+    --color-secondary: #28a745; /* Verde da sustentabilidade */
+    --color-tertiary: #fd7e14; /* Laranja da energia/ação */
+    --color-background-light: #f8f9fa; /* Fundo muito claro */
+    --color-text-dark: #343a40;
+    --color-text-light: #ffffff;
+    --font-primary: 'Arial', sans-serif;
+    --font-heading: 'Georgia', serif; /* Fonte com mais personalidade para títulos */
+    --spacing-default: 1rem;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    background-color: var(--color-text-light);
+}
+
+/* 2. CONTAINER E LAYOUT GERAL */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-default) 0;
+}
+
+.background-color-light {
+    background-color: var(--color-background-light);
+    padding: calc(var(--spacing-default) * 2) 0; /* Mais padding para seções */
+}
+
+/* 3. TIPOGRAFIA E ACESSIBILIDADE */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    margin-bottom: var(--spacing-default);
+    line-height: 1.2;
+}
+
+/* Hierarquia de Títulos */
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; color: var(--color-primary); }
+h3 { font-size: 1.5rem; }
+
+/* Garante contraste adequado (WCAG AA) */
+a, a:visited {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover, a:focus {
+    color: var(--color-secondary);
+    text-decoration: underline;
+}
+
+/* 4. CABEÇALHO (HEADER) */
+header {
+    background-color: var(--color-text-light);
+    padding: var(--spacing-default) 0;
+    border-bottom: 1px solid var(--color-background-light);
+    position: sticky; /* Sticky para melhor navegação */
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0; /* Remove padding vertical interno no container do header */
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+
+/* Navegação Mobile-First */
+nav ul {
+    list-style: none;
+    display: none; /* Esconde o menu por padrão no mobile */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-text-light);
+    border-top: 1px solid var(--color-background-light);
+    padding: var(--spacing-default);
+}
+
+.menu-toggle {
+    display: block; /* Mostra o botão de toggle no mobile */
+    background: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+nav ul a {
+    display: block;
+    padding: 0.5rem 0;
+    font-weight: 500;
+}
+
+/* 5. BOTÕES (CTA - Call To Action) */
+.button, .cta-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, opacity 0.3s;
+    margin: 0.5rem 0;
+}
+
+.primary-cta {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border: 2px solid var(--color-primary);
+}
+
+.primary-cta:hover, .primary-cta:focus {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.secondary-cta {
+    background-color: var(--color-secondary);
+    color: var(--color-text-light);
+    border: 2px solid var(--color-secondary);
+}
+
+.secondary-cta:hover, .secondary-cta:focus {
+    background-color: #1e7e34;
+    border-color: #1e7e34;
+}
+
+.tertiary-cta {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.tertiary-cta:hover, .tertiary-cta:focus {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+
+/* 6. SEÇÃO HERO */
+.hero {
+    position: relative;
+    color: var(--color-text-light);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.hero-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Manda a imagem para trás */
+    opacity: 0.7; /* Suaviza a imagem para o texto ser legível */
+}
+
+.hero .container {
+    /* Garante que o texto fique acima da imagem */
+    position: relative;
+    z-index: 2; 
+    max-width: 800px;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente para melhor leitura */
+    padding: var(--spacing-default);
+    border-radius: 10px;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+}
+
+/* 7. SEÇÃO DE CONTEÚDO (MISSÃO, CONTATO, ETC) */
+section {
+    padding: calc(var(--spacing-default) * 2) 0;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: var(--spacing-default);
+    border-radius: 8px;
+    margin-top: var(--spacing-default);
+}
+
+.card h3 {
+    color: var(--color-secondary);
+}
+
+/* 8. CONTATO E MULTIMÍDIA */
+.contact-info p {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.map-embed {
+    margin-top: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.map-embed iframe {
+    display: block; /* Remove o espaço extra abaixo do iframe */
+}
+
+/* 9. RODAPÉ (FOOTER) */
+footer {
+    background-color: var(--color-text-dark);
+    color: var(--color-background-light);
+    padding: var(--spacing-default);
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: var(--color-secondary);
+}
+
+.social-links {
+    margin-top: 1rem;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+    color: var(--color-background-light);
+}
+
+/* 10. MEDIA QUERIES (BREAKPOINT para Tablets e Desktops) */
+@media (min-width: 768px) {
+    
+    /* Layout do Header */
+    .menu-toggle {
+        display: none; /* Esconde o botão de toggle no desktop */
+    }
+
+    nav ul {
+        display: flex; /* Mostra a lista horizontalmente no desktop */
+        flex-direction: row;
+        position: static;
+        width: auto;
+        border-top: none;
+        padding: 0;
+        align-items: center;
+    }
+
+    nav ul li {
+        margin-left: 1.5rem;
+    }
+
+    nav ul a {
+        padding: 0;
+    }
+
+    /* Layout de Colunas (Missão) */
+    .grid-3-col {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+
+    /* Botões */
+    .button-group .button {
+        margin: 0 0.75rem;
+    }
+
+    .hero h2 {
+        font-size: 3.5rem;
+    }
+}
